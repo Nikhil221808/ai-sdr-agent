@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
+from pydantic import ValidationError
 from rich.console import Console
 from rich.table import Table
 
@@ -115,17 +116,29 @@ def main(argv: list[str] | None = None) -> int:
     seller = Path(args.seller).read_text()
     backend = _backend(args)
 
+    failures = 0
     if args.cmd == "run":
         prospects = [Prospect(
             company_domain=args.domain, first_name=args.first_name, last_name=args.last_name,
             title=args.title, email=args.email, linkedin_url=args.linkedin,
         )]
     else:
-        with open(args.csv_path, newline="") as f:
-            prospects = [Prospect(**{k: (v or None) if k in ("email", "linkedin_url") else v
-                                     for k, v in row.items()}) for row in csv.DictReader(f)]
+        prospects = []
+        # utf-8-sig strips the BOM that Excel/Sheets exports often add
+        with open(args.csv_path, newline="", encoding="utf-8-sig") as f:
+            for line_no, row in enumerate(csv.DictReader(f), start=2):
+                # k is None for overflow cells in rows with too many commas; drop them
+                row = {k.strip(): (v or "").strip() for k, v in row.items() if k}
+                for optional in ("email", "linkedin_url"):
+                    row[optional] = row.get(optional) or None
+                try:
+                    prospects.append(Prospect(**row))
+                except ValidationError as exc:
+                    failures += 1
+                    missing = ", ".join(str(e["loc"][0]) for e in exc.errors())
+                    console.print(f"[red]Skipping CSV line {line_no}: bad or missing {missing}[/red]")
 
-    results, failures = [], 0
+    results = []
     for p in prospects:
         console.rule(f"{p.first_name} @ {p.company_domain}")
         try:

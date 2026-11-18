@@ -44,7 +44,7 @@ flowchart LR
 | **Research** | Claude uses web search and web fetch to collect company facts and recent events (funding, hiring, leadership changes, launches, CRM migrations) and keeps the source URL for each. | `ResearchNotes` |
 | **Brief** | Turns the notes into structured data: ICP fit score against [`config/seller.md`](config/seller.md), likely pains, persona angle, and triggers. Each trigger must cite a URL from the research. | `AccountBrief` |
 | **Write** | Drafts a 60-110 word email that opens with a trigger, links it to one pain, adds one proof point, and ends with a low-friction question. | `EmailDraft` |
-| **Grade** | A separate reviewer prompt scores personalization, relevance, grounding, clarity, CTA and brevity from 1 to 5, and lists any claim the brief doesn't support. | `Grade` |
+| **Grade** | A separate reviewer prompt scores personalization, relevance, grounding, clarity, CTA and brevity from 1 to 5, and lists any claim the brief doesn't support. The pass rule itself (average ≥ 4, nothing below 3, no unsupported claims, 60-110 words) is enforced in code, not left to the model. | `Grade` |
 | **Revise** | If the draft fails, the reviewer's feedback goes back to the writer. The default is up to 2 rewrites. A draft that still fails is marked *needs human edit* rather than sent. | `SDRResult` |
 
 Every step returns a typed [Pydantic](sdr_agent/models.py) object through Claude's structured outputs, so later steps never parse free text.
@@ -70,7 +70,7 @@ pip install -e ".[dev]"
 python -m sdr_agent batch data/prospects_demo.csv --demo
 open outputs/   # one .md report and one .json file per prospect
 
-pytest          # 12 tests, all offline
+pytest          # 21 tests, all offline (the Claude backend is tested against a mocked HTTP layer)
 ```
 
 ### Live mode

@@ -62,11 +62,12 @@ class ClaudeBackend:
 
     FALLBACK_BETA = "server-side-fallback-2026-07-01"
 
-    def __init__(self, model: str | None = None, max_searches: int = 5):
+    def __init__(self, model: str | None = None, max_searches: int = 5, client=None):
         import anthropic  # imported lazily so demo mode needs no key
 
-        self.client = anthropic.Anthropic()
-        self.model = model or os.getenv("SDR_MODEL", "claude-opus-5-5")
+        self.client = client or anthropic.Anthropic()
+        # `or` (not a getenv default) so an empty SDR_MODEL= line in .env is ignored
+        self.model = model or os.getenv("SDR_MODEL") or "claude-opus-5-5"
         self.max_searches = max_searches
 
     # -- helpers ------------------------------------------------------------ #
@@ -136,12 +137,17 @@ class ClaudeBackend:
                     if isinstance(block.content, list):
                         for r in block.content:
                             sources.setdefault(r.url, Source(title=r.title, url=r.url))
+                elif block.type == "web_fetch_tool_result":
+                    # Success -> a web_fetch_result with a url; error -> error object.
+                    url = getattr(block.content, "url", None)
+                    if url:
+                        sources.setdefault(url, Source(title=url, url=url))
 
             if response.stop_reason != "pause_turn":
                 break
             messages.append({"role": "assistant", "content": response.content})
 
-        return ResearchNotes(notes="".join(text_parts).strip(), sources=list(sources.values()))
+        return ResearchNotes(notes="\n".join(text_parts).strip(), sources=list(sources.values()))
 
     def brief(self, prospect: Prospect, research: ResearchNotes, seller: str) -> AccountBrief:
         sources = "\n".join(f"- {s.title}: {s.url}" for s in research.sources) or "none"

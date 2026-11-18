@@ -107,6 +107,51 @@ def test_hubspot_requires_email():
         hubspot.HubSpot("t", client=httpx.Client()).upsert_contact(result)
 
 
+def _grade(scores, passed=True, claims=()):
+    from sdr_agent.models import Grade, RubricScore
+    crits = ["personalization", "relevance", "grounded", "clarity", "cta", "brevity"]
+    return Grade(
+        scores=[RubricScore(criterion=c, score=s, note="") for c, s in zip(crits, scores)],
+        overall=5.0, passed=passed, unsupported_claims=list(claims), revision_instructions="none",
+    )
+
+
+def _draft(words=80):
+    from sdr_agent.models import EmailDraft
+    return EmailDraft(subject="a b c", body=" ".join(["w"] * words), angle="", trigger_used="")
+
+
+def test_rules_override_grader_that_says_pass_on_hallucination():
+    g = pipeline.enforce_rules(_grade([5] * 6, claims=["made-up team size"]), _draft(), 4.0)
+    assert not g.passed
+    assert "claims" in g.revision_instructions
+
+
+def test_rules_recompute_overall_and_fail_low_criterion():
+    g = pipeline.enforce_rules(_grade([5, 5, 5, 5, 5, 2]), _draft(), 4.0)
+    assert g.overall == 4.5 and not g.passed
+
+
+def test_rules_fail_long_body():
+    assert not pipeline.enforce_rules(_grade([5] * 6), _draft(words=150), 4.0).passed
+
+
+def test_rules_pass_clean_draft():
+    assert pipeline.enforce_rules(_grade([4, 5, 5, 4, 4, 5]), _draft(), 4.0).passed
+
+
+def test_cli_batch_skips_bad_csv_rows(tmp_path: Path):
+    csv_path = tmp_path / "p.csv"
+    csv_path.write_text(
+        "﻿company_domain,first_name,last_name,title,email,linkedin_url\n"
+        "brightpath-health.example,Marcus,Lee,Head of RevOps,,\n"
+        "missing-title.example,Bo,,,,\n"
+    )
+    code = cli.main(["batch", str(csv_path), "--demo", "--out", str(tmp_path / "out")])
+    assert code == 1  # one bad row reported
+    assert len(list((tmp_path / "out").glob("*.md"))) == 1  # the good row still ran
+
+
 def test_cli_batch_demo(tmp_path: Path):
     csv_path = Path(__file__).resolve().parent.parent / "data" / "prospects_demo.csv"
     code = cli.main(["batch", str(csv_path), "--demo", "--out", str(tmp_path)])
