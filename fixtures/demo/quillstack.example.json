@@ -1,0 +1,75 @@
+{
+  "research": {
+    "notes": "Quillstack makes contract-review software for in-house legal teams (~180 employees, Austin). On 2026-10-02 it launched 'Quillstack for Procurement', its first product for a non-legal buyer. Priya Nair is CRO; a LinkedIn post from her (2026-10) says the team is 'learning a brand-new buyer and sales motion'. No public information on the size of the sales team or which CRM they use.",
+    "sources": [
+      {"title": "Introducing Quillstack for Procurement", "url": "https://quillstack.example/blog/procurement-launch"},
+      {"title": "Priya Nair on LinkedIn", "url": "https://linkedin.example/posts/priya-nair-quillstack"}
+    ]
+  },
+  "brief": {
+    "company_name": "Quillstack",
+    "one_liner": "Contract-review software for in-house legal teams, now expanding into procurement.",
+    "industry": "Legal tech SaaS",
+    "employee_range": "100-250",
+    "icp_fit_score": 64,
+    "icp_fit_reason": "In the size band and launching a new motion, but rep count and CRM are unknown.",
+    "likely_pains": [
+      "No historical baseline for how procurement deals progress",
+      "Hard to tell early which new-motion deals are real"
+    ],
+    "triggers": [
+      {"kind": "product_launch", "summary": "Launched Quillstack for Procurement, its first non-legal product", "date": "2026-10-02", "source_url": "https://quillstack.example/blog/procurement-launch"}
+    ],
+    "persona_angle": "CRO publicly saying the team is learning a new buyer and sales motion.",
+    "personalization_hooks": [
+      "Her post: 'learning a brand-new buyer and sales motion'"
+    ]
+  },
+  "drafts": [
+    {
+      "subject": "procurement deals on salesforce",
+      "body": "Hi Priya,\n\nCongrats on launching Quillstack for Procurement. With your 40-person sales team now selling to a brand-new buyer in Salesforce, it's hard to know which of those early deals are real.\n\nPipewise flags deals going stale from CRM activity and call notes, so you can see which procurement opportunities are actually moving. Customers cut slipped deals by about 30% within two quarters.\n\nWorth comparing notes on what a 'healthy' procurement deal looks like?\n\nSam Patel\nPipewise",
+      "angle": "A new buyer means no baseline for deal health; Pipewise shows which new-motion deals are moving.",
+      "trigger_used": "procurement launch"
+    },
+    {
+      "subject": "a new buyer, no baseline",
+      "body": "Hi Priya,\n\nYour post about learning a brand-new buyer with Quillstack for Procurement stuck with me. The hard part of a new motion is that there's no history telling you which early deals are real.\n\nPipewise flags deals going stale from CRM activity and call notes, so you see which procurement opportunities are actually moving, and why. Customers cut slipped deals by about 30% within two quarters.\n\nWorth comparing notes on what a healthy procurement deal looks like?\n\nSam Patel\nPipewise",
+      "angle": "A new buyer means no baseline for deal health; Pipewise shows which new-motion deals are moving.",
+      "trigger_used": "procurement launch + LinkedIn post"
+    }
+  ],
+  "grades": [
+    {
+      "scores": [
+        {"criterion": "personalization", "score": 4, "note": "Launch reference is specific."},
+        {"criterion": "relevance", "score": 4, "note": "New-motion uncertainty fits the persona."},
+        {"criterion": "grounded", "score": 1, "note": "States facts that are not in the brief."},
+        {"criterion": "clarity", "score": 4, "note": "Clear."},
+        {"criterion": "cta", "score": 5, "note": "Peer-style, low-friction ask."},
+        {"criterion": "brevity", "score": 5, "note": "77 words; 4-word subject."}
+      ],
+      "overall": 3.8,
+      "passed": false,
+      "unsupported_claims": [
+        "'40-person sales team': the brief says team size is unknown",
+        "'in Salesforce' / subject 'on salesforce': the brief says CRM is unknown"
+      ],
+      "revision_instructions": "Remove the team size and the CRM; neither is in the brief. Lean on her LinkedIn post about learning a new buyer instead. Change the subject so it doesn't mention Salesforce."
+    },
+    {
+      "scores": [
+        {"criterion": "personalization", "score": 5, "note": "References her own post and the launch."},
+        {"criterion": "relevance", "score": 4, "note": "New-motion uncertainty fits the persona."},
+        {"criterion": "grounded", "score": 5, "note": "No unsupported claims."},
+        {"criterion": "clarity", "score": 4, "note": "Clear."},
+        {"criterion": "cta", "score": 5, "note": "Peer-style, low-friction ask."},
+        {"criterion": "brevity", "score": 5, "note": "81 words; 5-word subject."}
+      ],
+      "overall": 4.7,
+      "passed": true,
+      "unsupported_claims": [],
+      "revision_instructions": "none"
+    }
+  ]
+}

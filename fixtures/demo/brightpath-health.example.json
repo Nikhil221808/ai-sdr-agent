@@ -1,0 +1,54 @@
+{
+  "research": {
+    "notes": "BrightPath Health sells patient-scheduling and intake software to outpatient clinics (~900 employees, Boston). A job posting for 'Salesforce Administrator, CRM Migration' (2026-10) says the company is moving its sales org from HubSpot to Salesforce in Q1 2027. A press release on 2026-08-04 announced Elena Ortiz as Chief Revenue Officer. Marcus Lee has led Revenue Operations since 2023 and his LinkedIn profile lists 'pipeline governance' and 'forecast cadence' as focus areas. No funding news in the last 6 months.",
+    "sources": [
+      {"title": "BrightPath names Elena Ortiz CRO", "url": "https://brightpath-health.example/press/new-cro"},
+      {"title": "Job: Salesforce Administrator, CRM Migration", "url": "https://brightpath-health.example/careers/sfdc-admin"}
+    ]
+  },
+  "brief": {
+    "company_name": "BrightPath Health",
+    "one_liner": "Patient-scheduling and intake software for outpatient clinics.",
+    "industry": "Healthcare SaaS",
+    "employee_range": "500-1,000",
+    "icp_fit_score": 81,
+    "icp_fit_reason": "Mid-size B2B SaaS with a new CRO and a CRM migration underway, two strong triggers.",
+    "likely_pains": [
+      "Pipeline data quality during a HubSpot to Salesforce migration",
+      "A new CRO wanting a trustworthy forecast quickly"
+    ],
+    "triggers": [
+      {"kind": "tech_change", "summary": "Migrating sales from HubSpot to Salesforce in Q1 2027", "date": "2026-10", "source_url": "https://brightpath-health.example/careers/sfdc-admin"},
+      {"kind": "leadership_change", "summary": "Elena Ortiz appointed Chief Revenue Officer", "date": "2026-08-04", "source_url": "https://brightpath-health.example/press/new-cro"}
+    ],
+    "persona_angle": "RevOps lead who owns pipeline governance and forecast cadence, now running a CRM migration for a new CRO.",
+    "personalization_hooks": [
+      "Hiring a Salesforce admin specifically for the migration",
+      "New CRO since August"
+    ]
+  },
+  "drafts": [
+    {
+      "subject": "pipeline hygiene mid-migration",
+      "body": "Hi Marcus,\n\nSaw BrightPath is hiring a Salesforce admin for the HubSpot move in Q1. Migrations are usually when deal data gets messiest, right as a new CRO is asking how much of the forecast to trust.\n\nPipewise sits on top of either CRM and flags deals going stale from activity and call notes, so your forecast cadence doesn't depend on reps updating fields mid-move. Setup is under a day on Salesforce or HubSpot.\n\nWould it help to have that running before cutover, or after?\n\nSam Patel\nPipewise",
+      "angle": "CRM migration plus new CRO makes forecast trust fragile; Pipewise works across both CRMs.",
+      "trigger_used": "HubSpot to Salesforce migration"
+    }
+  ],
+  "grades": [
+    {
+      "scores": [
+        {"criterion": "personalization", "score": 5, "note": "Migration job posting is specific and recent."},
+        {"criterion": "relevance", "score": 5, "note": "Pipeline governance is his stated focus."},
+        {"criterion": "grounded", "score": 5, "note": "All claims are in the brief."},
+        {"criterion": "clarity", "score": 4, "note": "Clear, slightly dense second paragraph."},
+        {"criterion": "cta", "score": 4, "note": "Choice question is low-friction."},
+        {"criterion": "brevity", "score": 5, "note": "88 words; 4-word subject."}
+      ],
+      "overall": 4.7,
+      "passed": true,
+      "unsupported_claims": [],
+      "revision_instructions": "none"
+    }
+  ]
+}

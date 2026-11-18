@@ -1,0 +1,75 @@
+{
+  "research": {
+    "notes": "Northwind Freight is a freight-audit and payment SaaS platform for mid-market shippers (~420 employees, HQ Chicago). On 2026-09-15 it announced a $40M Series B led by Harbor Ventures, earmarked for 'doubling the go-to-market team'. Its careers page lists 12 open Account Executive roles across the US and UK (as of 2026-10). Dana Reyes joined as VP of Sales in 2025 from a logistics software company; in a podcast interview (2026-08) she said the hardest part of scaling is 'getting new reps productive without the forecast falling apart'. The team runs on Salesforce.",
+    "sources": [
+      {"title": "Northwind Freight raises $40M Series B", "url": "https://northwind-freight.example/news/series-b"},
+      {"title": "Careers: Account Executive", "url": "https://northwind-freight.example/careers"},
+      {"title": "Scaling Sales podcast, ep. 88: Dana Reyes", "url": "https://podcasts.example/scaling-sales/88"}
+    ]
+  },
+  "brief": {
+    "company_name": "Northwind Freight",
+    "one_liner": "Freight-audit and payment SaaS for mid-market shippers.",
+    "industry": "Logistics software",
+    "employee_range": "250-500",
+    "icp_fit_score": 88,
+    "icp_fit_reason": "B2B SaaS in the ICP size band, on Salesforce, and hiring 12 AEs right after a Series B, which is the strongest ICP trigger.",
+    "likely_pains": [
+      "Forecast accuracy drops as many new reps ramp at once",
+      "Managers can't review every deal as the team doubles"
+    ],
+    "triggers": [
+      {"kind": "funding", "summary": "$40M Series B to double the go-to-market team", "date": "2026-09-15", "source_url": "https://northwind-freight.example/news/series-b"},
+      {"kind": "hiring", "summary": "12 open Account Executive roles in the US and UK", "date": "2026-10", "source_url": "https://northwind-freight.example/careers"}
+    ],
+    "persona_angle": "VP Sales scaling headcount fast; publicly worried about keeping the forecast reliable while new reps ramp.",
+    "personalization_hooks": [
+      "Podcast quote: 'getting new reps productive without the forecast falling apart'",
+      "Series B explicitly earmarked for doubling GTM"
+    ]
+  },
+  "drafts": [
+    {
+      "subject": "Quick question about Northwind's sales process and forecasting",
+      "body": "Hi Dana,\n\nI hope this finds you well! My name is Sam and I work at Pipewise, a deal-risk intelligence platform that helps B2B sales teams of all sizes improve their forecasting, pipeline hygiene, coaching, rep ramp time and overall revenue predictability using AI.\n\nCongrats on the recent funding. Lots of companies like yours are growing quickly and we've found that our platform can really help in a number of ways, from reading CRM activity and call notes to flagging deals that are at risk before the forecast call so your managers know where to focus.\n\nWould you be open to a 30-minute call next week so I can walk you through a demo and show you how other leaders use Pipewise?\n\nBest,\nSam",
+      "angle": "Pipewise improves forecasting for fast-growing teams.",
+      "trigger_used": "funding"
+    },
+    {
+      "subject": "new reps, same forecast",
+      "body": "Hi Dana,\n\nYou said on Scaling Sales that the hard part is getting new reps productive without the forecast falling apart. With 12 AE roles open after the Series B, that's about to be tested.\n\nPipewise reads Salesforce activity and call notes and flags deals going stale before your forecast call, so managers know which new-rep deals to coach that week. Customers cut slipped deals at quarter end by about 30% in their first two quarters, and setup takes under a day.\n\nWorth a look before the new hires start?\n\nSam Patel\nPipewise",
+      "angle": "Rapid AE hiring will strain the forecast; Pipewise flags at-risk deals so managers can coach new reps.",
+      "trigger_used": "12 open AE roles after Series B + podcast quote"
+    }
+  ],
+  "grades": [
+    {
+      "scores": [
+        {"criterion": "personalization", "score": 2, "note": "'Congrats on the recent funding' could go to any funded company."},
+        {"criterion": "relevance", "score": 3, "note": "Forecasting is relevant but not tied to her stated concern."},
+        {"criterion": "grounded", "score": 5, "note": "No unsupported claims."},
+        {"criterion": "clarity", "score": 2, "note": "Long feature list; several ideas at once."},
+        {"criterion": "cta", "score": 2, "note": "Asks for a 30-minute demo, which is a high-friction ask."},
+        {"criterion": "brevity", "score": 1, "note": "Body is 124 words and the subject is 9 words."}
+      ],
+      "overall": 2.5,
+      "passed": false,
+      "unsupported_claims": [],
+      "revision_instructions": "Drop the self-introduction and 'hope this finds you well'. Open with her podcast quote or the 12 AE openings. Keep one pain (forecast reliability while new reps ramp), one proof point, and ask a yes/no question instead of a 30-minute call. Body 60-110 words; subject 2-5 words, lowercase."
+    },
+    {
+      "scores": [
+        {"criterion": "personalization", "score": 5, "note": "Uses her own words plus the AE hiring push."},
+        {"criterion": "relevance", "score": 5, "note": "Directly addresses forecast risk from ramping reps."},
+        {"criterion": "grounded", "score": 5, "note": "All prospect facts come from the brief."},
+        {"criterion": "clarity", "score": 4, "note": "One idea, reads well on a phone."},
+        {"criterion": "cta", "score": 5, "note": "Easy yes/no question with a natural deadline."},
+        {"criterion": "brevity", "score": 5, "note": "93 words; 4-word subject."}
+      ],
+      "overall": 4.8,
+      "passed": true,
+      "unsupported_claims": [],
+      "revision_instructions": "none"
+    }
+  ]
+}
